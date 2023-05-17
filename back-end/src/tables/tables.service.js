@@ -47,6 +47,13 @@ function removeTableAssignment(table_id){
       .update({ reservation_id: null});
 }
 
+function updateStatus(reservationId, status) {
+  return knex("reservations")
+    .where({ reservation_id: reservationId })
+    .update({ status: status }, "*")
+    .then((updated) => updated[0]);
+}
+
 // Deletes table by table_id
 function destroy(table_id){
     return knex("tables")
@@ -62,5 +69,6 @@ module.exports = {
     readReservation,
     update,
     removeTableAssignment,
+    updateStatus,
     delete: destroy,
 }

@@ -199,25 +199,6 @@ function statusIsNotFinished(req, res, next) {
   }
 }
 
-//Show reservation if found by phone number
-/*async function searchByDateOrPhone(req, res, next) {
-  const { date, mobile_number } = req.query;
-  if (date) {
-    const reservations = await service.listReservationDates(date);
-    res.locals.data = reservations;
-    return next();
-  } else if (mobile_number) {
-      const reservation = await service.search(mobile_number);
-      res.locals.data = reservation;
-      return next();
-    } else {
-        return next({
-          status: 404, 
-          message: "No reservations found.",
-        });
-      }
-}  */
-
 /**
  * List handler for reservation 
  */
@@ -228,7 +209,6 @@ async function list(req, res) {
     data = await service.listReservationDates(date);
   } else if (mobile_number) {
     data = await service.search(mobile_number);
-
     /*if (!data || data.length === 0) {
       return res.status(404).json({error: "No reservations found."})
     }*/
@@ -266,6 +246,7 @@ async function updateStatus(req, res) {
   const { reservation_id } = res.locals.reservation;
   const { status } = req.body.data;
   const data = await service.updateStatus(reservation_id, status);
+  console.log(data)
   res.status(200).json({ data });
 }
 

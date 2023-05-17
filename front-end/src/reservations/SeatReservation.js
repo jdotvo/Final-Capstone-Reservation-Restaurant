@@ -39,7 +39,6 @@ function SeatReservation(){
           .catch(setReservationError);
         return () => abortController.abort();
     }; 
-    //console.log([reservation.reservation_date].toString().split("").splice(0,10).join(""))
 
     const handleChange = ({target}) => {
         setFormData({

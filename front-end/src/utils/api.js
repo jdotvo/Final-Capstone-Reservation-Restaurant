@@ -147,13 +147,12 @@ export async function finishTable(table_id, signal) {
 }
 
 // Update reservation info
-export async function updateReservation(reservation, signal){
-  if (!reservation.reservation_id) {
+export async function updateReservation(reservation_id, reservation, signal){
+  /*if (!reservation.reservation_id) {
     throw new Error("Reservation ID is undefined");
-  }
-  //reservation.reservation_time = Number(reservation.reservation_time);
+  }*/
 
-  const url = `${API_BASE_URL}/reservations/${reservation.reservation_id}`;
+  const url = `${API_BASE_URL}/reservations/${reservation_id}`;
   const options = {
     method: "PUT",
     headers,
@@ -174,6 +173,7 @@ export async function updateStatus(reservation_id, status, signal) {
   };
   return await fetchJson(url, options, {});*/
   const url = `${API_BASE_URL}/reservations/${reservation_id}/status`;
+  console.log('URL', url);
   const options = {
     method: "PUT",
     headers,
@@ -185,7 +185,7 @@ export async function updateStatus(reservation_id, status, signal) {
   const response = await fetchJson(url, options, {})
     .then((response) => console.log(response))
     .catch((error) => console.error(error));
-  console.log(`updateStatus response: ${JSON.stringify(response)}`);
+  console.log(`updateStatus response: ${response}`);
   return response;
 }
 

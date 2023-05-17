@@ -34,8 +34,6 @@ function Search(){
             setSearchError(error);
         }
         console.log(searchError)
-        console.log(searchResults)
-        console.log(searchResults.length)
     };
     
     

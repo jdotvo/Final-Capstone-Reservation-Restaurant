@@ -11,7 +11,6 @@ function SearchForm({ formData, handleChange }){
                 id="mobile_number"
                 type="text" 
                 style={ {width:"400px"} }
-                //pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 placeholder="Please enter phone number"
                 required
                 onChange={ handleChange }

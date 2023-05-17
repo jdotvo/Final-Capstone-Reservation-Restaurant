@@ -26,7 +26,17 @@ function EditReservation(){
         const abortController = new AbortController();
         setReservationsError(null);
         getReservation(reservation_id, abortController.signal)
-          .then((reservation) => setFormData(reservation))
+          .then((data) =>
+          setFormData({
+            first_name: data.first_name,
+            last_name: data.last_name,
+            mobile_number: data.mobile_number,
+            reservation_date: data.reservation_date.slice(0, 10),
+            reservation_time: data.reservation_time.slice(0, 5),
+            people: data.people,
+            status: data.status,
+          })
+        )
           .catch((error) => setReservationsError(error.message || "An error occurred while loading the reservation."));
         return () => abortController.abort();
     }
@@ -43,7 +53,6 @@ function EditReservation(){
         const abortController = new AbortController();
         try {
             const validFormData = {
-                reservation_id: formData.reservation_id,
                 first_name: formData.first_name,
                 last_name: formData.last_name,
                 mobile_number: formData.mobile_number,
@@ -51,7 +60,7 @@ function EditReservation(){
                 reservation_time: formData.reservation_time,
                 people: formData.people,
             };
-            await updateReservation(validFormData, abortController.signal);
+            await updateReservation(reservation_id, validFormData, abortController.signal);
             history.push(`/dashboard?date=${formData.reservation_date}`);
         } catch(error) {
             setReservationsError(error)

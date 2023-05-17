@@ -20,50 +20,6 @@ function NewReservation(){
     const [reservationError, setReservationError] = useState(false);
 
     const handleChange = ({target}) => {
-       /* let name = target.name;
-        let value = target.value;
- 
-Error check for reservation date
-- Reservation date cannot be on Tuesday
-- Reservation date can only be be on future date
-
-        if (name === "reservation_date"){
-            const inputtedDate = new Date(`${value} PDT`);
-            const reservationDate = inputtedDate.getTime();
-            const currentDate = Date.now();
-            let dateError = [];
-
-            if (inputtedDate.getUTCDay() === 2){
-                dateError.push(
-                    "The restaurant is closed on Tuesday."
-                );
-            } 
-            if (reservationDate < currentDate){
-                dateError.push(
-                    " Reservation date must be made in the future."
-                );
-            } 
-            setReservationError(dateError);
-        }
-
-/Error check for reservation time
-- Reservation time cannot be before 10:30 am
-- Reservation time cannot be after 9:30 pm
-
-        if (name === "reservation_time"){
-            const openTime = 1030;
-            const closeTime = 2130;
-            const reservationTime = value.substring(0, 2) + value.substring(3);
-            const timeError = [];
-
-            if (reservationTime < openTime || reservationTime > closeTime){
-                timeError.push(
-                    "Reservation time must be made between 10:30 AM and 9:30 PM."
-                );
-            }
-            setReservationError(timeError)
-        } */
-
         setFormData({
             ...formData,
             [target.name]: target.value,

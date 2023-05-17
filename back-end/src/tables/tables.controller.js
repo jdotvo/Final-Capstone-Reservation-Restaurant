@@ -49,14 +49,20 @@ async function tableExists(req, res, next) {
 async function reservationExists(req, res, next) {
   const { reservation_id } = req.body.data;
   const reservation = await service.readReservation(reservation_id);
-  if (reservation) {
+  if (reservation && reservation.status !== "seated") {
     res.locals.reservation = reservation;
     return next();
+  } else if (reservation && reservation.status === "seated"){
+    return next({
+      status: 400,
+      message: `reservation_id ${reservation_id} is already seated.`
+    });
+  } else {
+    return next({
+      status: 404,
+      message: `reservation_id ${reservation_id} cannot be found.`,
+    });
   }
-  next({
-    status: 404,
-    message: `reservation_id ${reservation_id} cannot be found.`,
-  });
 }
 
 //Table_name must be at least 2 characters long
@@ -86,7 +92,7 @@ function tableCapacity(req, res, next) {
 }
 
 //Table must have enough capacity for reservation
-async function enoughSeatingCapacity(req, res, next) {
+function enoughSeatingCapacity(req, res, next) {
   if (res.locals.table.capacity < res.locals.reservation.people) {
     return next({
       status: 400,
@@ -97,7 +103,7 @@ async function enoughSeatingCapacity(req, res, next) {
 }
 
 //Check if table is occupied
-async function tableIsOccupied(req, res, next) {
+function tableIsOccupied(req, res, next) {
   const { reservation_id } = res.locals.table;
   if (reservation_id) {
     return next({
@@ -109,7 +115,7 @@ async function tableIsOccupied(req, res, next) {
 }
 
 //Check if table is not occupied
-async function tableIsNotOccupied(req, res, next) {
+function tableIsNotOccupied(req, res, next) {
     const { reservation_id } = res.locals.table;
     if (!reservation_id) {
       return next({
@@ -148,8 +154,21 @@ async function update(req, res) {
     res.status(200).json({ data });
 }
 
+async function updateToSeatedStatus(req, res, next) {
+  const updatedReservation = {
+    ...res.locals.reservation,
+    status: "seated",
+  };
+  await service.updateStatus(
+    updatedReservation.reservation_id,
+    updatedReservation.status
+  );
+  next();
+}
+
 async function removeTableAssignment(req, res){
-    const { table_id} = res.locals.table;
+    const { table_id, reservation_id } = res.locals.table;
+    await service.updateStatus(reservation_id, "finished");
     await service.removeTableAssignment(table_id);
     res.status(200).json({});
 }
@@ -180,6 +199,7 @@ module.exports = {
         tableCapacity,
         enoughSeatingCapacity,
         tableIsOccupied,
+        updateToSeatedStatus,
         asyncErrorBoundary(update),
     ],
     removeTableAssignment: [

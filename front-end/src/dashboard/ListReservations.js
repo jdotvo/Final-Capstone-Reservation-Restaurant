@@ -19,8 +19,10 @@ function ListReservations({ reservations, handleCancel }){
               </thead>
               <tbody>
                 {reservations.length !== 0 ? (
-                    reservations.map((reservation) => (
-                      <tr key={reservation.reservation_id}>
+                    reservations.map((reservation) => {
+                      if(reservation.status !== "finished"){
+                        return (
+                          <tr key={reservation.reservation_id}>
                         <td>{reservation.reservation_id}</td>
                         <td>{reservation.first_name}</td>
                         <td>{reservation.last_name}</td>
@@ -60,7 +62,15 @@ function ListReservations({ reservations, handleCancel }){
                         )}
                         </td>
                     </tr>
-                    ))
+                        )
+                        
+                      } else {
+                        <tr>
+                          <td colSpan="9">No reservations were found.</td>
+                        </tr>
+                      }
+                    }   
+                  )
                 ) : (
                     <tr>
                       <td colSpan="9">No reservations were found.</td>
