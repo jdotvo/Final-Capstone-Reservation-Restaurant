@@ -45,6 +45,7 @@ function ReservationForm({ formData, handleChange }){
                     id="mobile_number"
                     name="mobile_number"
                     type="tel"
+                    pattern="[0-9]{10}"
                     placeholder="xxx-xxx-xxx"
                     style={ {width:"400px"} }
                     required

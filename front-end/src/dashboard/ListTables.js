@@ -25,6 +25,7 @@ function ListTables({ tables, handleFinish }){
                         </td>
                         <td>
                             <button
+                                disabled={table.reservation_id === null }
                                 type="button"
                                 className="btn btn-primary"
                                 data-table-id-finish={table.table_id}
