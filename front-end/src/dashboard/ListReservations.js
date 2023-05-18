@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function ListReservations({ reservations, handleCancel }){
     return (
@@ -35,20 +36,18 @@ function ListReservations({ reservations, handleCancel }){
                         <td>
                         {reservation.status === "booked"  && 
                           reservation.status !== "seated" && (
-                            <a
-                                href={`/reservations/${reservation.reservation_id}/seat`}
-                                className="btn btn-primary mx-1"
-                            >
-                            Seat
-                            </a>
+                            <Link to={`/reservations/${reservation.reservation_id}/seat`}>
+                              <button href={`/reservations/${reservation.reservation_id}/seat`} className="btn btn-primary mx-1" type="button">
+                                Seat
+                              </button>
+                            </Link>
                         )}
                         {reservation.status === "booked" && (
-                            <a
-                                href={`/reservations/${reservation.reservation_id}/edit`}
-                                className="btn btn-primary mx-1"
-                            >
-                            Edit
-                            </a>
+                          <Link to={`/reservations/${reservation.reservation_id}/edit`}>
+                              <button href={`/reservations/${reservation.reservation_id}/edit`} className="btn btn-primary mx-1" type="button">
+                                Edit
+                              </button>
+                          </Link>
                         )}
                         {reservation.status === "booked" && (
                             <button
