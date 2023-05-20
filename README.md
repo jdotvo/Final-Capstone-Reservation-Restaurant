@@ -1,6 +1,6 @@
 # Thinkful Capstone: Restaurant Reservation System
 
-This full stack application uses
+This full stack application uses:
 
 * HTML
 * CSS
@@ -70,8 +70,8 @@ The table below describes the existing files in the `./front-end` folder:
 
 ## Database setup
 
-1. Set up four new ElephantSQL database instances - development, test, preview, and production - by following the instructions in the "PostgreSQL: Creating & Deleting Databases" checkpoint.
-1. After setting up your database instances, connect DBeaver to your new database instances by following the instructions in the "PostgreSQL: Installing DBeaver" checkpoint.
+1. Set up four new ElephantSQL database instances - development, test, preview, and production.
+1. After setting up your database instances, connect DBeaver to your new database instances.
 
 ### Knex
 
@@ -87,11 +87,28 @@ Run `npx knex` commands from within the `back-end` folder, which is where the `k
 1. Run `npm install` to install project dependencies.
 1. Run `npm run start:dev` to start your server in development mode.
 
-If you have trouble getting the server to run, reach out for assistance.
+## Functionality
 
-## Running tests
+### Dashboard
+![Image of dashboard](https://github.com/jdotvo/Final-Capstone-Reservation-Restaurant/assets/110706695/62f72600-3f90-458a-ba27-50231e27ca7b)
 
-This project has unit, integration, and end-to-end (e2e) tests. 
-End-to-end tests use browser automation to interact with the application just like the user does.
+### Create a Reservation
+![Image of creating reservation](https://github.com/jdotvo/Final-Capstone-Reservation-Restaurant/assets/110706695/b333be12-9ac4-4b3a-b634-e761f3edf96e)
 
+### Create a Table
+![Image of creating table](https://github.com/jdotvo/Final-Capstone-Reservation-Restaurant/assets/110706695/4dcbc960-f874-4890-8604-d677d7f988ca)
 
+### Search for Reservation
+If reservation can be found:
+
+![Image of reservation found](https://github.com/jdotvo/Final-Capstone-Reservation-Restaurant/assets/110706695/64d85b71-6e93-40f7-aad6-b16bbbdea2be)
+
+If reservation cannot be found:
+
+![Image of reservation not found](https://github.com/jdotvo/Final-Capstone-Reservation-Restaurant/assets/110706695/cf5ff2c5-d844-46d5-841d-fcf7a6a8d480)
+
+### Edit Reservation
+![Image of editing reservation](https://github.com/jdotvo/Final-Capstone-Reservation-Restaurant/assets/110706695/e25567c5-4e71-4972-aa6a-807a257b407e)
+
+### Seat Reservation at a Table
+![Image of seating reservation at table](https://github.com/jdotvo/Final-Capstone-Reservation-Restaurant/assets/110706695/e68bd55c-c344-4d9c-9092-8e9593f78490)
